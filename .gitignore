@@ -1,0 +1,7 @@
+venv/
+environment.py
+.vscode/
+__py*
+dump*/
+*.txt
+output*/
