@@ -14,7 +14,7 @@ import sys
 
 config_mode = False
 # Commands that will configured when startet with 'config'
-CONFIGS=["no username ojaeckel privilege 15 secret 9 $9$h2xinXv9OUpLoE$FprJVF4Gnibsn.8H/6ZIL/MCStivEjDnNNLEZNIWXmM",
+CONFIGS=["no username DUMMYUSER privilege 15 secret 5 $1$M4iM$R8.Qh62WbPA5GTop2pppt.",""
         ]
 # Commands that will executed 
 COMMANDS = ["sh run | i usern",
@@ -87,20 +87,17 @@ def worker_config(device):
         if not os.path.isdir(OUTPUT_DIR):
             os.makedirs(OUTPUT_DIR)
         with open (f"{OUTPUT_DIR}/{hostfilename}","w") as outputfile:
-            outputfile.write(f"{CONFIGS}\n")
+            outputfile.write("*"*40)
+            outputfile.write("\n")
+            outputfile.write(str(CONFIGS))
+            outputfile.write("\n")
+            outputfile.write("-"*40)
+            outputfile.write("\n")
+            commandoutput = ssh_session.send_config_set(CONFIGS, delay_factor=DF, cmd_verify=False) # Use  cmd_verify=False if you need to confirm (for example delete user)
+            outputfile.write(commandoutput) 
             outputfile.write("\n")
             outputfile.write("*"*40)
             outputfile.write("\n")
-            for command in CONFIGS:
-                outputfile.write(command)
-                outputfile.write("\n")
-                outputfile.write("-"*40)
-                outputfile.write("\n")
-                commandoutput = ssh_session.send_config_set(command, delay_factor=DF) # Use  cmd_verify=False if you need to confirm (for example delete user)
-                outputfile.write(commandoutput) 
-                outputfile.write("\n")
-                outputfile.write("*"*40)
-                outputfile.write("\n")
         return(True)
     except Exception as e:
         IP = device["ip"]
