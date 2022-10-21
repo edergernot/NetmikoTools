@@ -5,4 +5,4 @@ discover_devices.py: add subnet and credentials to scan, then write hostfile and
 
 send_commands.py: send a list of commands or start with the option "config" to configure some commands
 
-findÄ_last_stp.py: after imput of IP and unsername, password it searches where last STP-Topology change comes from
+find_last_stp.py: after imput of IP and unsername, password it searches where last STP-Topology change comes from
