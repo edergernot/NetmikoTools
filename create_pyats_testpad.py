@@ -7,14 +7,12 @@ with open(filename) as f:
 
 # Create testbed File with data from environment and hostfile created during 'createinventory.py'    
 with open("testbed.yaml","w") as f:
+    f.write("---\n\n") # Needet to be yaml file
     f.write("devices:\n")
     for device in devices.split("\n"):
         if device == '':
             continue
         hostname = device.split(",")[1]
-        #if device == devices.split("\n")[0]:
-        #    alias = "uut"
-        #else:
         alias = hostname
         ip = device.split(",")[0]
         protocol = device.split(",")[3]
